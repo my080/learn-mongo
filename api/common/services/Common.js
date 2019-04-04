@@ -8,10 +8,15 @@
 
 // Public dependencies.
 const _ = require('lodash');
+const RedisDao = require('../dao/redis-dao.js');
 
 module.exports = {
 
   login: () => {
+    let user = { id: 1, name: 'dfdfdf' }
+    var str = JSON.stringify(user)
+    let redisDao = new RedisDao();
+    redisDao.add('user', str)
     let result = {
       code: 200,
       msg: 'success',
@@ -21,6 +26,12 @@ module.exports = {
   },
 
   logout: () => {
+    let user = { id: 1, name: 'dfdfdf' }
+    var str = JSON.stringify(user)
+    let redisDao = new RedisDao();
+    redisDao.add('user', str).then((data) => {
+      console.log(data);
+    })
     let result = {
       code: 200,
       msg: 'success',

@@ -1,19 +1,18 @@
-"use strict"
 
-const redisConfig = require('../../../config/redis-config.js')
-const RedisPool = require('redis-connection-pool')
+const redisConfig = require('./redis-config.js');
+const RedisPool = require('redis-connection-pool');
 
 class RedisConnection {
 
-	constructor () {
-		this.config = redisConfig
-	}
+  constructor () {
+    this.config = redisConfig;
+  }
 
-	getInstance () {
-		let redisPool = RedisPool('myRedisPool', this.config)
-		return redisPool
-	}
+  getInstance () {
+    let redisPool = RedisPool('myRedisPool', this.config);
+    return redisPool;
+  }
 
 }
 
-module.exports = RedisConnection
+module.exports = RedisConnection;
