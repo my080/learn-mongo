@@ -1,0 +1,21 @@
+{
+  "connection": "default",
+  "collectionName": "",
+  "info": {
+    "name": "question",
+    "description": "题型表"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "title": {
+      "default": "",
+      "type": "integer"
+    },
+    "content": {
+      "default": "",
+      "type": "string"
+    }
+  }
+}

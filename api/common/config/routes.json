@@ -1,0 +1,20 @@
+{
+  "routes": [
+    {
+      "method": "POST",
+      "path": "/login",
+      "handler": "Common.login",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/logout",
+      "handler": "Common.logout",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}
