@@ -1,56 +1,32 @@
 'use strict';
 
 /**
- * Common.js service
+ * Provincescities.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
 
 // Public dependencies.
 const _ = require('lodash');
-// const RedisDao = require('../dao/redis-dao.js');
 
 module.exports = {
 
-  login: (params) => {
-    console.log(params)
-    // let user = params
-    // var str = JSON.stringify(user)
-    // let redisDao = new RedisDao();
-    // redisDao.add('user', str)
-    let result = {
-      code: 200,
-      msg: 'success',
-      data: null
-    }
-    return result;
-  },
-
-  logout: () => {
-    let result = {
-      code: 200,
-      msg: 'success',
-      data: null
-    }
-    return result;
-  },
-
   /**
-   * Promise to fetch all commons.
+   * Promise to fetch all provincescities.
    *
    * @return {Promise}
    */
 
   fetchAll: (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('common', params);
+    const filters = strapi.utils.models.convertParams('provincescities', params);
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Provincescities.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Common
+    return Provincescities
       .find()
       .where(filters.where)
       .sort(filters.sort)
@@ -60,90 +36,90 @@ module.exports = {
   },
 
   /**
-   * Promise to fetch a/an common.
+   * Promise to fetch a/an provincescities.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Provincescities.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Common
-      .findOne(_.pick(params, _.keys(Common.schema.paths)))
+    return Provincescities
+      .findOne(_.pick(params, _.keys(Provincescities.schema.paths)))
       .populate(populate);
   },
 
   /**
-   * Promise to count commons.
+   * Promise to count provincescities.
    *
    * @return {Promise}
    */
 
   count: (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('common', params);
+    const filters = strapi.utils.models.convertParams('provincescities', params);
 
-    return Common
+    return Provincescities
       .countDocuments()
       .where(filters.where);
   },
 
   /**
-   * Promise to add a/an common.
+   * Promise to add a/an provincescities.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Common.associations.map(ast => ast.alias));
-    const data = _.omit(values, Common.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Provincescities.associations.map(ast => ast.alias));
+    const data = _.omit(values, Provincescities.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Common.create(data);
+    const entry = await Provincescities.create(data);
 
     // Create relational data and return the entry.
-    return Common.updateRelations({ _id: entry.id, values: relations });
+    return Provincescities.updateRelations({ _id: entry.id, values: relations });
   },
 
   /**
-   * Promise to edit a/an common.
+   * Promise to edit a/an provincescities.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Common.associations.map(a => a.alias));
-    const data = _.omit(values, Common.associations.map(a => a.alias));
+    const relations = _.pick(values, Provincescities.associations.map(a => a.alias));
+    const data = _.omit(values, Provincescities.associations.map(a => a.alias));
 
     // Update entry with no-relational data.
-    const entry = await Common.updateOne(params, data, { multi: true });
+    const entry = await Provincescities.updateOne(params, data, { multi: true });
 
     // Update relational data and return the entry.
-    return Common.updateRelations(Object.assign(params, { values: relations }));
+    return Provincescities.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an common.
+   * Promise to remove a/an provincescities.
    *
    * @return {Promise}
    */
 
   remove: async params => {
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Provincescities.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
     // Note: To get the full response of Mongo, use the `remove()` method
     // or add spent the parameter `{ passRawResult: true }` as second argument.
-    const data = await Common
+    const data = await Provincescities
       .findOneAndRemove(params, {})
       .populate(populate);
 
@@ -152,7 +128,7 @@ module.exports = {
     }
 
     await Promise.all(
-      Common.associations.map(async association => {
+      Provincescities.associations.map(async association => {
         if (!association.via || !data._id || association.dominant) {
           return true;
         }
@@ -173,22 +149,22 @@ module.exports = {
   },
 
   /**
-   * Promise to search a/an common.
+   * Promise to search a/an provincescities.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('common', params);
+    const filters = strapi.utils.models.convertParams('provincescities', params);
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Provincescities.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    const $or = Object.keys(Common.attributes).reduce((acc, curr) => {
-      switch (Common.attributes[curr].type) {
+    const $or = Object.keys(Provincescities.attributes).reduce((acc, curr) => {
+      switch (Provincescities.attributes[curr].type) {
         case 'integer':
         case 'float':
         case 'decimal':
@@ -212,7 +188,7 @@ module.exports = {
       }
     }, []);
 
-    return Common
+    return Provincescities
       .find({ $or })
       .sort(filters.sort)
       .skip(filters.start)

@@ -1,0 +1,68 @@
+{
+  "connection": "default",
+  "collectionName": "provincescities",
+  "info": {
+    "name": "provincescities",
+    "description": "省份和市的数据，直辖市与省同级"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "type": "string"
+    },
+    "pid": {
+      "default": "",
+      "type": "string"
+    },
+    "isRoot": {
+      "default": true,
+      "type": "boolean",
+      "required": true
+    },
+    "zip_code": {
+      "default": "",
+      "type": "string"
+    },
+    "create_time": {
+      "default": "",
+      "type": "date",
+      "required": true
+    },
+    "update_time": {
+      "default": "",
+      "type": "date",
+      "required": true
+    },
+    "status": {
+      "default": "0",
+      "type": "enumeration",
+      "required": true,
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    "code": {
+      "default": "",
+      "type": "string"
+    },
+    "type": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "province",
+        "city",
+        "country",
+        "zone"
+      ]
+    },
+    "index_code": {
+      "collection": "zone",
+      "via": "pcode"
+    }
+  }
+}

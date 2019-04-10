@@ -1,56 +1,32 @@
 'use strict';
 
 /**
- * Common.js service
+ * Zone.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
 
 // Public dependencies.
 const _ = require('lodash');
-// const RedisDao = require('../dao/redis-dao.js');
 
 module.exports = {
 
-  login: (params) => {
-    console.log(params)
-    // let user = params
-    // var str = JSON.stringify(user)
-    // let redisDao = new RedisDao();
-    // redisDao.add('user', str)
-    let result = {
-      code: 200,
-      msg: 'success',
-      data: null
-    }
-    return result;
-  },
-
-  logout: () => {
-    let result = {
-      code: 200,
-      msg: 'success',
-      data: null
-    }
-    return result;
-  },
-
   /**
-   * Promise to fetch all commons.
+   * Promise to fetch all zones.
    *
    * @return {Promise}
    */
 
   fetchAll: (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('common', params);
+    const filters = strapi.utils.models.convertParams('zone', params);
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Zone.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Common
+    return Zone
       .find()
       .where(filters.where)
       .sort(filters.sort)
@@ -60,90 +36,90 @@ module.exports = {
   },
 
   /**
-   * Promise to fetch a/an common.
+   * Promise to fetch a/an zone.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Zone.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Common
-      .findOne(_.pick(params, _.keys(Common.schema.paths)))
+    return Zone
+      .findOne(_.pick(params, _.keys(Zone.schema.paths)))
       .populate(populate);
   },
 
   /**
-   * Promise to count commons.
+   * Promise to count zones.
    *
    * @return {Promise}
    */
 
   count: (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('common', params);
+    const filters = strapi.utils.models.convertParams('zone', params);
 
-    return Common
+    return Zone
       .countDocuments()
       .where(filters.where);
   },
 
   /**
-   * Promise to add a/an common.
+   * Promise to add a/an zone.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Common.associations.map(ast => ast.alias));
-    const data = _.omit(values, Common.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Zone.associations.map(ast => ast.alias));
+    const data = _.omit(values, Zone.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Common.create(data);
+    const entry = await Zone.create(data);
 
     // Create relational data and return the entry.
-    return Common.updateRelations({ _id: entry.id, values: relations });
+    return Zone.updateRelations({ _id: entry.id, values: relations });
   },
 
   /**
-   * Promise to edit a/an common.
+   * Promise to edit a/an zone.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Common.associations.map(a => a.alias));
-    const data = _.omit(values, Common.associations.map(a => a.alias));
+    const relations = _.pick(values, Zone.associations.map(a => a.alias));
+    const data = _.omit(values, Zone.associations.map(a => a.alias));
 
     // Update entry with no-relational data.
-    const entry = await Common.updateOne(params, data, { multi: true });
+    const entry = await Zone.updateOne(params, data, { multi: true });
 
     // Update relational data and return the entry.
-    return Common.updateRelations(Object.assign(params, { values: relations }));
+    return Zone.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an common.
+   * Promise to remove a/an zone.
    *
    * @return {Promise}
    */
 
   remove: async params => {
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Zone.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
     // Note: To get the full response of Mongo, use the `remove()` method
     // or add spent the parameter `{ passRawResult: true }` as second argument.
-    const data = await Common
+    const data = await Zone
       .findOneAndRemove(params, {})
       .populate(populate);
 
@@ -152,7 +128,7 @@ module.exports = {
     }
 
     await Promise.all(
-      Common.associations.map(async association => {
+      Zone.associations.map(async association => {
         if (!association.via || !data._id || association.dominant) {
           return true;
         }
@@ -173,22 +149,22 @@ module.exports = {
   },
 
   /**
-   * Promise to search a/an common.
+   * Promise to search a/an zone.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('common', params);
+    const filters = strapi.utils.models.convertParams('zone', params);
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Zone.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    const $or = Object.keys(Common.attributes).reduce((acc, curr) => {
-      switch (Common.attributes[curr].type) {
+    const $or = Object.keys(Zone.attributes).reduce((acc, curr) => {
+      switch (Zone.attributes[curr].type) {
         case 'integer':
         case 'float':
         case 'decimal':
@@ -212,7 +188,7 @@ module.exports = {
       }
     }, []);
 
-    return Common
+    return Zone
       .find({ $or })
       .sort(filters.sort)
       .skip(filters.start)

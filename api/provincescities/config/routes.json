@@ -1,0 +1,52 @@
+{
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/provincescities",
+      "handler": "Provincescities.find",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/provincescities/count",
+      "handler": "Provincescities.count",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/provincescities/:_id",
+      "handler": "Provincescities.findOne",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/provincescities",
+      "handler": "Provincescities.create",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "PUT",
+      "path": "/provincescities/:_id",
+      "handler": "Provincescities.update",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "DELETE",
+      "path": "/provincescities/:_id",
+      "handler": "Provincescities.destroy",
+      "config": {
+        "policies": []
+      }
+    }
+  ]
+}

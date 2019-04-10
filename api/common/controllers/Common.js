@@ -9,15 +9,10 @@
 module.exports = {
 
   login: async (ctx) => {
-    return strapi.services.common.login(ctx);
+    return strapi.services.common.login(ctx.request.body);
   },
 
   logout: async (ctx) => {
-    let result = {
-      code: 200,
-      msg: 'success',
-      data: null
-    }
     return strapi.services.common.logout(ctx);
   },
 
