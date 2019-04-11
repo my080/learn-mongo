@@ -6,6 +6,10 @@
  * @description: A set of functions called "actions" for managing `Common`.
  */
 
+function isSuccess () {
+
+}
+
 module.exports = {
 
   login: async (ctx) => {
@@ -14,6 +18,21 @@ module.exports = {
 
   logout: async (ctx) => {
     return strapi.services.common.logout(ctx);
+  },
+
+  register: async (ctx) => {
+    let isSuccess = strapi.services.common.register(ctx.query)
+    let returnObj = {
+      code: 200,
+      msg: 'success',
+      success: true,
+      data: {}
+    }
+    if (isSuccess) {
+      returnObj.success = false;
+    }
+
+    return returnObj;
   },
 
   /**

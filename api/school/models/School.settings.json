@@ -1,0 +1,58 @@
+{
+  "connection": "default",
+  "collectionName": "school",
+  "info": {
+    "name": "school",
+    "description": "学校"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "code": {
+      "default": "",
+      "unique": true,
+      "type": "string",
+      "required": true
+    },
+    "name": {
+      "default": "",
+      "type": "string",
+      "required": true
+    },
+    "zid": {
+      "model": "zone",
+      "via": "z_code"
+    },
+    "create_time": {
+      "default": "",
+      "type": "date"
+    },
+    "update_time": {
+      "default": "",
+      "type": "date"
+    },
+    "status": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    "schooltypes": {
+      "collection": "period",
+      "via": "code",
+      "columnName": ""
+    },
+    "zone_id": {
+      "default": "",
+      "type": "string"
+    },
+    "consumers": {
+      "collection": "consumer",
+      "via": "schools"
+    }
+  }
+}

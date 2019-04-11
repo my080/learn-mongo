@@ -1,0 +1,34 @@
+{
+  "connection": "default",
+  "collectionName": "subject",
+  "info": {
+    "name": "subject",
+    "description": "学科"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "type": "string"
+    },
+    "create_time": {
+      "default": "",
+      "type": "date"
+    },
+    "update_time": {
+      "default": "",
+      "type": "date"
+    },
+    "status": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ]
+    }
+  }
+}

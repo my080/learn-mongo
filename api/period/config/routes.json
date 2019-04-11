@@ -2,48 +2,48 @@
   "routes": [
     {
       "method": "GET",
-      "path": "/zones",
-      "handler": "Zone.find",
+      "path": "/periods",
+      "handler": "Period.find",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/zones/count",
-      "handler": "Zone.count",
+      "path": "/periods/count",
+      "handler": "Period.count",
       "config": {
         "policies": []
       }
     },
     {
       "method": "GET",
-      "path": "/zones/:_id",
-      "handler": "Zone.findOne",
+      "path": "/periods/:_id",
+      "handler": "Period.findOne",
       "config": {
         "policies": []
       }
     },
     {
       "method": "POST",
-      "path": "/zones",
-      "handler": "Zone.create",
+      "path": "/periods",
+      "handler": "Period.create",
       "config": {
         "policies": []
       }
     },
     {
       "method": "PUT",
-      "path": "/zones/:_id",
-      "handler": "Zone.update",
+      "path": "/periods/:_id",
+      "handler": "Period.update",
       "config": {
         "policies": []
       }
     },
     {
       "method": "DELETE",
-      "path": "/zones/:_id",
-      "handler": "Zone.destroy",
+      "path": "/periods/:_id",
+      "handler": "Period.destroy",
       "config": {
         "policies": []
       }

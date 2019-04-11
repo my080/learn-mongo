@@ -1,0 +1,39 @@
+{
+  "connection": "default",
+  "collectionName": "grade",
+  "info": {
+    "name": "grade",
+    "description": "年级"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "名称": {
+      "default": "",
+      "type": "string"
+    },
+    "create_time": {
+      "default": "",
+      "type": "date"
+    },
+    "update_time": {
+      "default": "",
+      "type": "date"
+    },
+    "status": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ]
+    },
+    "period": {
+      "model": "period",
+      "via": "grades"
+    }
+  }
+}

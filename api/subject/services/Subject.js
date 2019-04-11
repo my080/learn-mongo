@@ -1,59 +1,32 @@
 'use strict';
 
 /**
- * Common.js service
+ * Subject.js service
  *
  * @description: A set of functions similar to controller's actions to avoid code duplication.
  */
 
 // Public dependencies.
 const _ = require('lodash');
-// const RedisDao = require('../dao/redis-dao.js');
 
 module.exports = {
 
-  login: (params) => {
-    // let user = params
-    // var str = JSON.stringify(user)
-    // let redisDao = new RedisDao();
-    // redisDao.add('user', str)
-    let result = {
-      code: 200,
-      msg: 'success',
-      data: null
-    }
-    return result;
-  },
-
-  logout: () => {
-    let result = {
-      code: 200,
-      msg: 'success',
-      data: null
-    }
-    return result;
-  },
-
-  register: (ctx) => {
-
-  },
-
   /**
-   * Promise to fetch all commons.
+   * Promise to fetch all subjects.
    *
    * @return {Promise}
    */
 
   fetchAll: (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('common', params);
+    const filters = strapi.utils.models.convertParams('subject', params);
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Subject.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Common
+    return Subject
       .find()
       .where(filters.where)
       .sort(filters.sort)
@@ -63,90 +36,90 @@ module.exports = {
   },
 
   /**
-   * Promise to fetch a/an common.
+   * Promise to fetch a/an subject.
    *
    * @return {Promise}
    */
 
   fetch: (params) => {
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Subject.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    return Common
-      .findOne(_.pick(params, _.keys(Common.schema.paths)))
+    return Subject
+      .findOne(_.pick(params, _.keys(Subject.schema.paths)))
       .populate(populate);
   },
 
   /**
-   * Promise to count commons.
+   * Promise to count subjects.
    *
    * @return {Promise}
    */
 
   count: (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('common', params);
+    const filters = strapi.utils.models.convertParams('subject', params);
 
-    return Common
+    return Subject
       .countDocuments()
       .where(filters.where);
   },
 
   /**
-   * Promise to add a/an common.
+   * Promise to add a/an subject.
    *
    * @return {Promise}
    */
 
   add: async (values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Common.associations.map(ast => ast.alias));
-    const data = _.omit(values, Common.associations.map(ast => ast.alias));
+    const relations = _.pick(values, Subject.associations.map(ast => ast.alias));
+    const data = _.omit(values, Subject.associations.map(ast => ast.alias));
 
     // Create entry with no-relational data.
-    const entry = await Common.create(data);
+    const entry = await Subject.create(data);
 
     // Create relational data and return the entry.
-    return Common.updateRelations({ _id: entry.id, values: relations });
+    return Subject.updateRelations({ _id: entry.id, values: relations });
   },
 
   /**
-   * Promise to edit a/an common.
+   * Promise to edit a/an subject.
    *
    * @return {Promise}
    */
 
   edit: async (params, values) => {
     // Extract values related to relational data.
-    const relations = _.pick(values, Common.associations.map(a => a.alias));
-    const data = _.omit(values, Common.associations.map(a => a.alias));
+    const relations = _.pick(values, Subject.associations.map(a => a.alias));
+    const data = _.omit(values, Subject.associations.map(a => a.alias));
 
     // Update entry with no-relational data.
-    const entry = await Common.updateOne(params, data, { multi: true });
+    const entry = await Subject.updateOne(params, data, { multi: true });
 
     // Update relational data and return the entry.
-    return Common.updateRelations(Object.assign(params, { values: relations }));
+    return Subject.updateRelations(Object.assign(params, { values: relations }));
   },
 
   /**
-   * Promise to remove a/an common.
+   * Promise to remove a/an subject.
    *
    * @return {Promise}
    */
 
   remove: async params => {
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Subject.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
     // Note: To get the full response of Mongo, use the `remove()` method
     // or add spent the parameter `{ passRawResult: true }` as second argument.
-    const data = await Common
+    const data = await Subject
       .findOneAndRemove(params, {})
       .populate(populate);
 
@@ -155,7 +128,7 @@ module.exports = {
     }
 
     await Promise.all(
-      Common.associations.map(async association => {
+      Subject.associations.map(async association => {
         if (!association.via || !data._id || association.dominant) {
           return true;
         }
@@ -176,22 +149,22 @@ module.exports = {
   },
 
   /**
-   * Promise to search a/an common.
+   * Promise to search a/an subject.
    *
    * @return {Promise}
    */
 
   search: async (params) => {
     // Convert `params` object to filters compatible with Mongo.
-    const filters = strapi.utils.models.convertParams('common', params);
+    const filters = strapi.utils.models.convertParams('subject', params);
     // Select field to populate.
-    const populate = Common.associations
+    const populate = Subject.associations
       .filter(ast => ast.autoPopulate !== false)
       .map(ast => ast.alias)
       .join(' ');
 
-    const $or = Object.keys(Common.attributes).reduce((acc, curr) => {
-      switch (Common.attributes[curr].type) {
+    const $or = Object.keys(Subject.attributes).reduce((acc, curr) => {
+      switch (Subject.attributes[curr].type) {
         case 'integer':
         case 'float':
         case 'decimal':
@@ -215,7 +188,7 @@ module.exports = {
       }
     }, []);
 
-    return Common
+    return Subject
       .find({ $or })
       .sort(filters.sort)
       .skip(filters.start)

@@ -2,20 +2,24 @@
   "connection": "default",
   "collectionName": "",
   "info": {
-    "name": "zone",
-    "description": "区域表，归属市级以下，包括区县"
+    "name": "consumer",
+    "description": "产品用户"
   },
   "options": {
     "timestamps": true
   },
   "attributes": {
-    "code": {
-      "default": "",
-      "type": "string"
-    },
     "name": {
       "default": "",
       "type": "string"
+    },
+    "password": {
+      "default": "",
+      "type": "password"
+    },
+    "email": {
+      "default": "",
+      "type": "email"
     },
     "create_time": {
       "default": "",
@@ -25,25 +29,24 @@
       "default": "",
       "type": "date"
     },
-    "type": {
+    "status": {
       "default": "",
       "type": "enumeration",
       "enum": [
-        "zone",
-        "country"
+        "0",
+        "1",
+        "2"
       ]
     },
-    "pid": {
-      "default": "",
-      "type": "string"
-    },
-    "pcode": {
-      "model": "provincescities",
-      "via": "index_code"
-    },
-    "z_code": {
+    "schools": {
       "collection": "school",
-      "via": "zid"
+      "via": "consumers",
+      "dominant": true
+    },
+    "periods": {
+      "collection": "period",
+      "via": "consumers",
+      "dominant": true
     }
   }
 }

@@ -1,0 +1,38 @@
+{
+  "connection": "default",
+  "collectionName": "schooltype",
+  "info": {
+    "name": "period",
+    "description": "学段：大、高、中、小学"
+  },
+  "options": {
+    "timestamps": true
+  },
+  "attributes": {
+    "name": {
+      "default": "",
+      "type": "string"
+    },
+    "status": {
+      "default": "",
+      "type": "enumeration",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ]
+    },
+    "code": {
+      "model": "school",
+      "via": "schooltypes"
+    },
+    "consumers": {
+      "collection": "consumer",
+      "via": "periods"
+    },
+    "grades": {
+      "collection": "grade",
+      "via": "period"
+    }
+  }
+}
