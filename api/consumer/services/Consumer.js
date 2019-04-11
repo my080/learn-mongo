@@ -53,6 +53,18 @@ module.exports = {
       .populate(populate);
   },
 
+  init: async (values) => {
+    // Extract values related to relational data.
+    const relations = _.pick(values, Consumer.associations.map(ast => ast.alias));
+    const data = _.omit(values, Consumer.associations.map(ast => ast.alias));
+
+    // Create entry with no-relational data.
+    const entry = await Consumer.create(data);
+
+    // Create relational data and return the entry.
+    return Consumer.updateRelations({ _id: entry.id, values: relations });
+  },
+
   /**
    * Promise to count consumers.
    *

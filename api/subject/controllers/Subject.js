@@ -15,7 +15,6 @@ module.exports = {
    */
 
   find: async (ctx) => {
-    console.log(ctx.query);
     if (ctx.query._q) {
       return strapi.services.subject.search(ctx.query);
     } else {

@@ -1,6 +1,6 @@
 {
   "connection": "default",
-  "collectionName": "",
+  "collectionName": "consumer",
   "info": {
     "name": "consumer",
     "description": "产品用户"
@@ -45,6 +45,15 @@
     },
     "periods": {
       "collection": "period",
+      "via": "consumers",
+      "dominant": true
+    },
+    "activate_code": {
+      "default": "",
+      "type": "string"
+    },
+    "subjects": {
+      "collection": "subject",
       "via": "consumers",
       "dominant": true
     }

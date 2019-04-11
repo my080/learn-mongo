@@ -33,6 +33,14 @@
       }
     },
     {
+      "method": "POST",
+      "path": "/init",
+      "handler": "Consumer.init",
+      "config": {
+        "policies": []
+      }
+    },
+    {
       "method": "PUT",
       "path": "/consumers/:_id",
       "handler": "Consumer.update",

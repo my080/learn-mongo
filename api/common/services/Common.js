@@ -8,6 +8,7 @@
 
 // Public dependencies.
 const _ = require('lodash');
+let Utils = require('../utils/util.js')
 // const RedisDao = require('../dao/redis-dao.js');
 
 module.exports = {
@@ -17,12 +18,17 @@ module.exports = {
     // var str = JSON.stringify(user)
     // let redisDao = new RedisDao();
     // redisDao.add('user', str)
+    console.log(params);
     let result = {
       code: 200,
       msg: 'success',
       data: null
     }
     return result;
+  },
+
+  activate: (param) => {
+    console.log(param);
   },
 
   logout: () => {
@@ -34,9 +40,13 @@ module.exports = {
     return result;
   },
 
-  register: (ctx) => {
-
+  sendEmail (recipient, subject, html) {
+    Utils.sendEmail(recipient, subject, html);
   },
+
+  // register: (ctx) => {
+  //
+  // },
 
   /**
    * Promise to fetch all commons.

@@ -6,10 +6,6 @@
  * @description: A set of functions called "actions" for managing `Common`.
  */
 
-function isSuccess () {
-
-}
-
 module.exports = {
 
   login: async (ctx) => {
@@ -18,6 +14,31 @@ module.exports = {
 
   logout: async (ctx) => {
     return strapi.services.common.logout(ctx);
+  },
+
+  activate: async (ctx) => {
+    strapi.services.common.activate(ctx);
+    let returnObj = {
+      code: 200,
+      msg: 'success',
+      success: true,
+      data: {}
+    }
+    return returnObj;
+  },
+
+  sendEmail: async (ctx) => {
+    let email = ctx.request.body.email;
+    let title = ctx.request.body.title;
+    let html = ctx.request.body.html;
+    strapi.services.common.sendEmail(email, title, html)
+    let returnObj = {
+      code: 200,
+      msg: 'success',
+      success: true,
+      data: {}
+    }
+    return returnObj;
   },
 
   register: async (ctx) => {
@@ -31,7 +52,6 @@ module.exports = {
     if (isSuccess) {
       returnObj.success = false;
     }
-
     return returnObj;
   },
 

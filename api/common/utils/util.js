@@ -1,5 +1,7 @@
 'use strict';
 
+let Email = require('./email.js')
+
 class Util {
 
   constructor () {
@@ -8,6 +10,11 @@ class Util {
 
   static hasLogin () {
 
+  }
+
+  static sendEmail (recipient, subject, html) {
+    let email = new Email();
+    email.sendEmail(recipient, subject, html);
   }
 
 }

@@ -20,6 +20,8 @@
   },
   "dependencies": {
     "lodash": "^4.17.5",
+    "nodemailer": "^6.1.0",
+    "nodemailer-smtp-transport": "^2.7.4",
     "redis-connection-pool": "^1.7.2",
     "strapi": "3.0.0-alpha.25.2",
     "strapi-hook-mongoose": "3.0.0-alpha.25.2"

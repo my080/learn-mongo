@@ -5,6 +5,7 @@
  *
  * @description: A set of functions called "actions" for managing `Consumer`.
  */
+let ResultMsg = require('../../common/utils/result/result-msg.js')
 
 module.exports = {
 
@@ -54,6 +55,19 @@ module.exports = {
 
   create: async (ctx) => {
     return strapi.services.consumer.add(ctx.request.body);
+  },
+
+  init: async (ctx) => {
+    ctx.request.body.status = 0
+    let obj = {
+      email: ctx.request.body.email
+    }
+    let consumer = strapi.services.consumer.fetch(obj)
+    if (!consumer) {
+      return ResultMsg.success(strapi.services.consumer.add(ctx.request.body));
+    } else {
+      return ResultMsg.result({}, 201, '该邮箱已经注册，请更换其他邮箱！');
+    }
   },
 
   /**

@@ -1,9 +1,17 @@
 {
   "routes": [
     {
-      "method": "GET",
+      "method": "POST",
       "path": "/login",
       "handler": "Common.login",
+      "config": {
+        "policies": []
+      }
+    },
+    {
+      "method": "POST",
+      "path": "/send-email",
+      "handler": "Common.sendEmail",
       "config": {
         "policies": []
       }

@@ -29,6 +29,10 @@
         "1",
         "2"
       ]
+    },
+    "consumers": {
+      "collection": "consumer",
+      "via": "subjects"
     }
   }
 }
